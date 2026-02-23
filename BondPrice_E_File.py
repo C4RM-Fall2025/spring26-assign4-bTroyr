@@ -1,17 +1,11 @@
 def getBondPrice_E(face, couponRate, yc):
+    coupon = face * couponRate
     bondPrice = 0.0
-    periodic_coupon = face * couponRate
-    total_periods = m
 
-    for period_idx, rate in enumerate(yc, start=1):
-        if period_idx == total_periods:
-            cf = periodic_coupon + face
-        else:
-            cf = periodic_coupon
-        
-        pv_factor = 1 / (1 + rate) ** period_idx
-        pvcf = cf * pv_factor
+    for t, y in enumerate(yc, start=1):
+        cf = coupon
+        if t == len(yc):
+            cf += face
+        bondPrice += cf / ((1 + y) ** t)
 
-        bondPrice += pvcf
-
-    return(bondPrice)
+    return (bondPrice)

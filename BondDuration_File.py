@@ -1,5 +1,5 @@
 def getBondDuration(y, face, couponRate, m, ppy = 1):
-    periodic_yiled = y / ppy
+    periodic_yield = y / ppy
     periodic_coupon = face * couponRate / ppy
     total_periods = m * ppy
 

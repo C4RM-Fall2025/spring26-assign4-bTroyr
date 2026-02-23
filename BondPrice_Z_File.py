@@ -1,18 +1,12 @@
-
-
 def getBondPrice_Z(face, couponRate, times, yc):
-    bondprice = 0.0
-    periodic_coupon = face * couponRate
+    coupon = face * couponRate
+    bondPrice = 0.0
+    n = len(times)
 
-    for t, rate in zip(times, yc):
-        if t == max(times):
-            cf = periodic_coupon + face
-        else:
-            cf = periodic_coupon
+    for i, (t, y) in enumerate(zip(times, yc), start=1):
+        cf = coupon
+        if i == n:
+            cf += face
+        bondPrice += cf / ((1 + y) ** t)
 
-        pv_factor = 1/ (1 + rate) ** t
-        pvcf = cf * pv_factor
-
-        bondPrice += pvcf
-
-    return(bondPrice)
+    return (bondPrice)
